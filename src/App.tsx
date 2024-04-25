@@ -15,9 +15,39 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx";
 import "./App.css";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const isLoggedIn = false;
+  const [eventName, setEventName] = useState("");
+  const [eventDescription, setEventDescription] = useState("");
+  const [headerImageUrl, setHeaderImageUrl] = useState("");
+  const [eventDate, setEventDate] = useState("");
+
+  useEffect(() => {
+    fetch("https://nfctron-frontend-seating-case-study-2024.vercel.app/event")
+      .then((response) => response.json())
+      .then((data) => {
+        setEventName(data.namePub);
+        setEventDescription(data.description);
+        setHeaderImageUrl(data.headerImageUrl);
+        setEventDate(data.dateFrom); // Assuming 'dateFrom' is the start date of the event
+      })
+      .catch((error) => console.error("Error fetching event data:", error));
+  }, []);
+
+  const handleAddToCalendar = () => {
+    const startDate = new Date(eventDate);
+    startDate.setHours(12, 0, 0); // Set start time to 12:00
+    const endDate = new Date(eventDate);
+    endDate.setHours(18, 0, 0); // Set end time to 18:00
+
+    const formattedStartDate = startDate.toISOString().replace(/-|:|\.\d\d\d/g, '');
+    const formattedEndDate = endDate.toISOString().replace(/-|:|\.\d\d\d/g, '');
+
+    const eventUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventName)}&dates=${formattedStartDate}/${formattedEndDate}&details=${encodeURIComponent(eventDescription)}&sf=true&output=xml`;
+    window.open(eventUrl, '_blank');
+  };
 
   return (
     <div className="flex flex-col grow">
@@ -90,22 +120,19 @@ function App() {
           </div>
 
           {/* event info */}
-          <aside className="w-full md:max-w-sm bg-white rounded-md shadow-sm p-3 flex flex-col gap-2 order-last md:order-none">
-            {/* event header image placeholder */}
-            <div className="bg-zinc-100 rounded-md h-32" />
+          <aside className="w-full md:max-w-sm bg-white rounded-md shadow-sm p-3 flex flex-col gap-2 order-first md:order-none">
+            {/* event header image */}
+            <img
+              src={headerImageUrl}
+              alt="Event Header"
+              className="rounded-md h-45 md:h-60"
+            />
             {/* event name */}
-            <h1 className="text-xl text-zinc-900 font-semibold">
-              [event-name]
-            </h1>
+            <h1 className="text-xl text-zinc-900 font-semibold">{eventName}</h1>
             {/* event description */}
-            <p className="text-sm text-zinc-500">
-              [event-description]: Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Aliquam aliquid asperiores beatae deserunt dicta
-              dolorem eius eos fuga laborum nisi officia pariatur quidem
-              repellendus, reprehenderit sapiente, sed tenetur vel voluptatibus?
-            </p>
+            <p className="text-sm text-zinc-500">{eventDescription}</p>
             {/* add to calendar button */}
-            <Button variant="secondary" disabled>
+            <Button variant="secondary" onClick={handleAddToCalendar}>
               Add to calendar
             </Button>
           </aside>
