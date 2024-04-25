@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Seat } from "@/components/Seat.tsx";
-import Navbar from "./Navbar"; // Adjust the import path as necessary
+import Navbar from "./Navbar";
 import { Button } from "@/components/ui/button.tsx";
 import "./App.css";
 
@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="flex flex-col grow">
-      <Navbar isLoggedIn={isLoggedIn} /> {/* Navbar with isLoggedIn prop */}
+      <Navbar isLoggedIn={isLoggedIn} /> {}
       <main className="grow flex flex-col justify-center">
         <div className="max-w-screen-lg m-auto p-4 flex flex-col md:flex-row items-start grow gap-3 w-full">
           <div
