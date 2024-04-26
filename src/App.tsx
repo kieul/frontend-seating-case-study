@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Seat } from "@/components/Seat.tsx";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { Button } from "@/components/ui/button.tsx";
 import "./App.css";
 
@@ -49,7 +50,7 @@ function App() {
 
   return (
     <div className="flex flex-col grow">
-      <Navbar isLoggedIn={isLoggedIn} /> {}
+      <Navbar isLoggedIn={isLoggedIn} /> {/* Navbar with isLoggedIn prop */}
       <main className="grow flex flex-col justify-center">
         <div className="max-w-screen-lg m-auto p-4 flex flex-col md:flex-row items-start grow gap-3 w-full">
           <div
@@ -77,28 +78,18 @@ function App() {
               </h1>
             </Link>
             <p className="text-sm text-zinc-500">{eventDescription}</p>
-            <Button variant="secondary" onClick={handleAddToCalendar}>
+            <Button
+              variant="secondary"
+              onClick={handleAddToCalendar}
+              className=" hover:bg-violet-950		 hover:text-white transition duration-500"
+            >
               Add to calendar
             </Button>
           </aside>
         </div>
       </main>
       {/* bottom cart affix (wrapper) */}
-      <nav className="sticky bottom-0 left-0 right-0 bg-white border-t border-zinc-200 flex justify-center">
-        {/* inner content */}
-        <div className="max-w-screen-lg p-6 flex justify-between items-center gap-4 grow">
-          {/* total in cart state */}
-          <div className="flex flex-col">
-            <span>Total for [?] tickets</span>
-            <span className="text-2xl font-semibold">[?] CZK</span>
-          </div>
-
-          {/* checkout button */}
-          <Button disabled variant="default">
-            Checkout now
-          </Button>
-        </div>
-      </nav>
+      <Footer />
     </div>
   );
 }

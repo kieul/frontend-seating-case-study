@@ -32,7 +32,11 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn }) => {
             />
           </a>
         </div>
-        <div className="bg-zinc-100 rounded-md h-8 w-[200px]" />
+        <input
+          type="text"
+          placeholder="Search..."
+          className="bg-zinc-100 rounded-md h-8 w-[200px] px-2 hover:ring-2 hover:ring-violet-900	 hover:bg-transparent transition duration-500"
+        />
         <div className="max-w-[250px] w-full flex justify-end">
           {isLoggedIn ? (
             <DropdownMenu>

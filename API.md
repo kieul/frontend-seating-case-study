@@ -4,9 +4,11 @@ Potřebné API je dostupné na adrese `https://nfctron-frontend-seating-case-stu
 endpointy:
 
 ### Informace o akci
+
 Endpoint: `GET:/event`
 
 Odpověď:
+
 ```json
 {
   "eventId": "uuid",
@@ -21,9 +23,11 @@ Odpověď:
 ```
 
 ### Vstupenky a místa k sezení na akci
+
 Endpoint: `GET:/event-tickets?eventId=<uuid>`
 
 Odpověď:
+
 ```json
 {
   "ticketTypes": [
@@ -49,11 +53,13 @@ Odpověď:
 ```
 
 ### Testovací login
+
 Endpoint: `POST:/login`
 
 > Použijte email: `frontend@nfctron.com` a heslo: `Nfctron2025`
 
 Vstup:
+
 ```json
 {
   "email": "string",
@@ -75,9 +81,11 @@ Odpověď:
 ```
 
 ### Vytvoření objednávky
+
 Endpoint: `POST:/order`
 
 Vstup:
+
 ```json
 {
   "eventId": "uuid",

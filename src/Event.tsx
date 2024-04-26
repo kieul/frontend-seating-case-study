@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar"; // Ensure the path is correct based on your project structure
+import { useEffect, useState } from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { Button } from "@/components/ui/button.tsx";
 
 const Event = () => {
@@ -63,23 +64,32 @@ const Event = () => {
                 <img
                   src={eventData.headerImageUrl}
                   alt="Event Header"
-                  style={{ borderRadius: "20px" }}
+                  style={{ borderRadius: "10px" }}
                 />
-                <h1 className="text-xl text-zinc-900 font-semibold">
+                <h1 className="text-2xl text-zinc-900 font-semibold pt-5">
                   {eventData.name}
                 </h1>
-                <p className="text-sm text-zinc-500">{eventData.description}</p>
-                <p>
-                  Datum:{" "}
-                  {new Date(eventData.dateFrom).toLocaleDateString("cs-CZ", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                  })}
+                <p className="text-s py-3 text-zinc-500">
+                  {eventData.description}
                 </p>
-                <p>Místo: {eventData.place}</p>
-                <aside className="w-full  bg-white rounded-md shadow-sm p-3 flex flex-col gap-2">
-                  <Button variant="secondary" onClick={handleAddToCalendar}>
+                <div className="flex flex-col gap-2 pb-4">
+                  <p className="text-s">
+                    Kdy:{" "}
+                    {new Date(eventData.dateFrom).toLocaleDateString("cs-CZ", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </p>
+                  <p>Místo: {eventData.place}</p>
+                </div>
+
+                <aside className="w-full rounded-md shadow-sm flex flex-col gap-2">
+                  <Button
+                    variant="secondary"
+                    onClick={handleAddToCalendar}
+                    className="hover:ring-purple-800 hover:bg-violet-950 hover:text-white transition duration-500"
+                  >
                     Add to calendar
                   </Button>
                 </aside>
@@ -87,6 +97,7 @@ const Event = () => {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     </>
   );
