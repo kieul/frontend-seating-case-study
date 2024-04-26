@@ -73,11 +73,22 @@ function App() {
               />
             </Link>
             <Link to="/event">
-              <h1 className="text-xl text-zinc-900 font-semibold">
+              <h1 className="text-2xl text-zinc-900 font-semibold pt-4">
                 {eventName}
               </h1>
             </Link>
-            <p className="text-sm text-zinc-500">{eventDescription}</p>
+            <p className="text-sm text-zinc-500 py-3">{eventDescription}</p>
+            <div className="flex flex-col gap-2 pb-4">
+              <p className="text-sm">
+                Kdy:{" "}
+                {new Date(eventDate).toLocaleDateString("cs-CZ", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
+              <p className="text-sm">Místo: {eventPlace}</p>
+            </div>
             <Button
               variant="secondary"
               onClick={handleAddToCalendar}

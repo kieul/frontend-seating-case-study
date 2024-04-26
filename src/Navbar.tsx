@@ -34,8 +34,8 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn }) => {
         </div>
         <input
           type="text"
-          placeholder="Search..."
-          className="bg-zinc-100 rounded-md h-8 w-[200px] px-2 hover:ring-2 hover:ring-violet-900	 hover:bg-transparent transition duration-500"
+          placeholder="🔍"
+          className="bg-zinc-50 rounded-md h-8 w-[200px] px-2 text-end	 hover:ring-2 hover:ring-violet-900 hover:bg-transparent transition duration-500"
         />
         <div className="max-w-[250px] w-full flex justify-end">
           {isLoggedIn ? (
