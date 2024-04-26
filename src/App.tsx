@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Seat } from "@/components/Seat.tsx";
+import { Seat } from "@/components/Seat";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import "./App.css";
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
     const eventEndTime = new Date(eventDate);
     eventEndTime.setHours(18, 0, 0);
 
-    const formatDateTime = (date: Date) =>
+    const formatDateTime = (date) =>
       date.toISOString().replace(/-|:|\.\d\d\d/g, "");
 
     const eventUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
@@ -50,7 +50,7 @@ function App() {
 
   return (
     <div className="flex flex-col grow">
-      <Navbar isLoggedIn={isLoggedIn} /> {/* Navbar with isLoggedIn prop */}
+      <Navbar isLoggedIn={isLoggedIn} />
       <main className="grow flex flex-col justify-center">
         <div className="max-w-screen-lg m-auto p-4 flex flex-col md:flex-row items-start grow gap-3 w-full">
           <div
@@ -92,7 +92,7 @@ function App() {
             <Button
               variant="secondary"
               onClick={handleAddToCalendar}
-              className=" hover:bg-violet-950		 hover:text-white transition duration-500"
+              className="hover:bg-violet-950 hover:text-white transition duration-500"
             >
               Add to calendar
             </Button>
