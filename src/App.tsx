@@ -13,11 +13,11 @@ function App() {
   const [headerImageUrl, setHeaderImageUrl] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventPlace, setEventPlace] = useState("");
-  const EVENT_API_URL =
+  const API_URL =
     "https://nfctron-frontend-seating-case-study-2024.vercel.app/event";
 
   useEffect(() => {
-    fetch(EVENT_API_URL)
+    fetch(API_URL)
       .then((response) => response.json())
       .then((data) => {
         setEventName(data.namePub);
@@ -35,7 +35,7 @@ function App() {
     const eventEndTime = new Date(eventDate);
     eventEndTime.setHours(18, 0, 0);
 
-    const formatDateTime = (date) =>
+    const formatDateTime = (date: Date) =>
       date.toISOString().replace(/-|:|\.\d\d\d/g, "");
 
     const eventUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
