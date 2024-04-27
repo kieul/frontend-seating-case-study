@@ -4,6 +4,8 @@ import { Seat } from "@/components/Seat";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import requests from "./Requests";
 import "./App.css";
 
 function App() {
@@ -13,13 +15,12 @@ function App() {
   const [headerImageUrl, setHeaderImageUrl] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventPlace, setEventPlace] = useState("");
-  const API_URL =
-    "https://nfctron-frontend-seating-case-study-2024.vercel.app/event";
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get(requests.requestAPI)
+      .then((response) => {
+        const data = response.data;
         setEventName(data.namePub);
         setEventDescription(data.description);
         setHeaderImageUrl(data.headerImageUrl);
@@ -28,6 +29,7 @@ function App() {
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []);
+
 
   const handleAddToCalendar = () => {
     const eventStartTime = new Date(eventDate);
