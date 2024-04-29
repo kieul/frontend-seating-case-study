@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Button } from "@/components/ui/button.tsx";
+import axios from "axios";
+import requests from "./Requests";
+
 
 const Event = () => {
   const [eventData, setEventData] = useState({
@@ -13,11 +16,10 @@ const Event = () => {
   });
 
   useEffect(() => {
-    const EVENT_API_URL =
-      "https://nfctron-frontend-seating-case-study-2024.vercel.app/event";
-    fetch(EVENT_API_URL)
-      .then((response) => response.json())
-      .then((data) => {
+    axios
+      .get(requests.requestAPI)
+      .then((response) => {
+        const data = response.data;
         setEventData({
           name: data.namePub,
           description: data.description,

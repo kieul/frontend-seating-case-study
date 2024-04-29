@@ -29,18 +29,16 @@ function App() {
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []);
-  
+
   useEffect(() => {
     axios
       .get(requests.requestEvent)
       .then((response) => {
         const data = response.data;
         setEventName(data.namePub);
-       
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []);
-
 
   const handleAddToCalendar = () => {
     const eventStartTime = new Date(eventDate);
