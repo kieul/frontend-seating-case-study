@@ -1,14 +1,25 @@
 import { Button } from "@/components/ui/button.tsx";
 import { useCart } from "@/components/Cart";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const { totalTickets, totalPrice, removeFromCart } = useCart();
+  const navigate = useNavigate();
+  const isLoggedIn = false;
 
+  const handleCheckout = () => {
+    if (isLoggedIn) {
+      navigate("/checkout");
+    } else {
+      navigate("/guest");
+    }
+  };
+  
   const handleRemoveTicket = () => {
-    // Assuming each ticket has a fixed price for simplicity
-    // This would need to be adjusted if different tickets have different prices
-    const ticketPrice = totalPrice / totalTickets;
-    removeFromCart(ticketPrice);
+    if (totalTickets > 0) {
+      const ticketPrice = totalPrice / totalTickets;
+      removeFromCart(ticketPrice);
+    }
   };
 
   return (
@@ -26,7 +37,12 @@ const Footer = () => {
           >
             Remove a ticket
           </Button>
-          <Button disabled={totalTickets === 0} variant="default">
+          <Button
+            onClick={handleCheckout}
+            disabled={totalTickets === 0}
+            variant="default"
+            className="hover:bg-green-600"
+          >
             Checkout now
           </Button>
         </div>

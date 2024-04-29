@@ -47,18 +47,18 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
     }
   };
 
-    const handleRemoveFromCart = () => {
-      if (selectedSeat) {
-        const ticketType = ticketTypes.find(
-          (type) => type.id === selectedSeat.ticketTypeId
-        );
-        if (ticketType) {
-          removeFromCart(ticketType.price);
-          setIsInCart(false);
-          setSelectedSeat(null); // Optionally deselect the seat
-        }
+  const handleRemoveFromCart = () => {
+    if (selectedSeat) {
+      const ticketType = ticketTypes.find(
+        (type) => type.id === selectedSeat.ticketTypeId
+      );
+      if (ticketType) {
+        removeFromCart(ticketType.price);
+        setIsInCart(false);
+        setSelectedSeat(null); // Optionally deselect the seat
       }
-    };
+    }
+  };
 
   useEffect(() => {
     axios
@@ -115,7 +115,10 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
         <footer className="flex flex-col">
           {isInCart ? (
             <Button
-              onClick={handleRemoveFromCart}
+              onClick={() => {
+                handleRemoveFromCart();
+                setSelectedSeat(selectedSeat);
+              }}
               variant="destructive"
               size="sm"
             >
