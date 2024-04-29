@@ -69,8 +69,9 @@ function App() {
           <div
             className="bg-white rounded-md grow grid p-3 self-stretch shadow-sm"
             style={{
-              gridTemplateColumns: "repeat(auto-fill, minmax(40px, 1fr))",
+              gridTemplateColumns: "repeat(10, minmax(40px, 1fr))",
               gridAutoRows: "40px",
+              gridAutoFlow: "row dense",
             }}
           >
             {Array.from({ length: 40 }, (_, i) => (
@@ -82,7 +83,7 @@ function App() {
               <img
                 src={headerImageUrl}
                 alt="Event Header"
-                className="rounded-md h-45 md:h-60"
+                className="rounded-md max-w-full h-auto mx-auto"
               />
             </Link>
             <Link to="/event">

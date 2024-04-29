@@ -64,7 +64,7 @@ const Event = () => {
                 <img
                   src={eventData.headerImageUrl}
                   alt="Event Header"
-                  className="rounded-md w-full md:h-80"
+                  className="rounded-md max-w-full h-auto mx-auto"
                 />
                 <h1 className="text-2xl text-zinc-900 font-semibold pt-5">
                   {eventData.name}
