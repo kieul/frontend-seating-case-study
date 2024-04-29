@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils.ts";
 import React, { useState, useEffect, forwardRef } from "react";
 import axios from "axios";
 import requests from "@/Requests";
+import { useCart } from "@/components/Cart"; // Corrected import for useCart
 
 interface SeatProps extends React.HTMLAttributes<HTMLElement> {}
 interface TicketType {
@@ -32,6 +33,32 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
   const [seatRows, setSeatRows] = useState<SeatRow[]>([]);
   const [selectedSeat, setSelectedSeat] = useState<Seat | null>(null);
   const [isInCart, setIsInCart] = useState(false);
+  const { addToCart, removeFromCart } = useCart();
+
+  const handleAddToCart = () => {
+    if (selectedSeat) {
+      const ticketType = ticketTypes.find(
+        (type) => type.id === selectedSeat.ticketTypeId
+      );
+      if (ticketType) {
+        addToCart(ticketType.price);
+        setIsInCart(true);
+      }
+    }
+  };
+
+    const handleRemoveFromCart = () => {
+      if (selectedSeat) {
+        const ticketType = ticketTypes.find(
+          (type) => type.id === selectedSeat.ticketTypeId
+        );
+        if (ticketType) {
+          removeFromCart(ticketType.price);
+          setIsInCart(false);
+          setSelectedSeat(null); // Optionally deselect the seat
+        }
+      }
+    };
 
   useEffect(() => {
     axios
@@ -42,19 +69,6 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
       })
       .catch((error) => console.error("Failed to fetch seat data:", error));
   }, []);
-
-  const handleAddToCart = () => {
-    if (selectedSeat) {
-      setIsInCart(true);
-      console.log("Added to cart:", selectedSeat);
-    }
-  };
-
-  const handleRemoveFromCart = () => {
-    setIsInCart(false);
-    setSelectedSeat(null);
-    console.log("Removed from cart");
-  };
 
   return (
     <Popover>
@@ -68,7 +82,7 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
           onClick={() => setSelectedSeat(seatRows[0]?.seats[0])} // Example logic to select a seat
         >
           <span className="text-xs p-2 rounded-full bg-indigo-500 text-white font-medium hover:bg-indigo-300">
-            {selectedSeat ? selectedSeat.place : "[n]"}
+            [n]
           </span>
         </div>
       </PopoverTrigger>
@@ -98,7 +112,6 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
             </>
           )}
         </pre>
-
         <footer className="flex flex-col">
           {isInCart ? (
             <Button
@@ -118,4 +131,3 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
     </Popover>
   );
 });
-
