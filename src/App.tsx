@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Seat } from "@/components/Seat";
-import { CartProvider } from './components/Cart';
+import { CartProvider } from "./components/Cart";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import requests from "./Requests";
 import "./App.css";
+
+interface Seat {
+  id: number;
+}
+
+interface SeatRow {
+  seats: Seat[];
+}
 
 function App() {
   const isLoggedIn = false;
@@ -16,6 +24,7 @@ function App() {
   const [headerImageUrl, setHeaderImageUrl] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventPlace, setEventPlace] = useState("");
+  const [seatRows, setSeatRows] = useState<SeatRow[]>([]);
 
   useEffect(() => {
     axios
@@ -36,7 +45,7 @@ function App() {
       .get(requests.requestEvent)
       .then((response) => {
         const data = response.data;
-        setEventName(data.namePub);
+        setSeatRows(data.seatRows);
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []);
@@ -69,16 +78,16 @@ function App() {
             <div
               className="bg-white rounded-md grow grid p-3 self-stretch shadow-sm"
               style={{
-                gridTemplateColumns: "repeat(10, minmax(40px, 1fr))",
+                gridTemplateColumns: "repeat(9, minmax(40px, 1fr))",
                 gridAutoRows: "40px",
                 gridAutoFlow: "row dense",
               }}
             >
-              {Array.from({ length: 40 }, (_, i) => (
-                <Seat key={i} />
-              ))}
+              {seatRows.map((seatRow) => {
+                return seatRow.seats.map((seat, index) => <Seat key={index} />);
+              })}
             </div>
-            
+
             <aside className="w-full md:max-w-sm bg-white rounded-md shadow-sm p-3 flex flex-col gap-2 order-first md:order-none">
               <Link to="/event">
                 <img
@@ -121,4 +130,3 @@ function App() {
 }
 
 export default App;
-
