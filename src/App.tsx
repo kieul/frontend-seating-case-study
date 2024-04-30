@@ -13,10 +13,6 @@ interface Seat {
   id: number;
 }
 
-interface SeatRow {
-  seats: Seat[];
-}
-
 function App() {
   const isLoggedIn = false;
   const [eventName, setEventName] = useState("");
@@ -78,7 +74,7 @@ function App() {
             <div
               className="bg-white rounded-md grow grid p-3 self-stretch shadow-sm"
               style={{
-                gridTemplateColumns: "repeat(10, minmax(40px, 1fr))",
+                gridTemplateColumns: "repeat(9, minmax(40px, 1fr))",
                 gridAutoRows: "40px",
                 gridAutoFlow: "row dense",
               }}

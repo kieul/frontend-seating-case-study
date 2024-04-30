@@ -32,7 +32,7 @@ const Footer = () => {
             {totalPrice} CZK
           </span>
         </div>
-        <div className="flex space-x-5">
+        <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
           <Button
             disabled={totalTickets === 0}
             onClick={handleRemoveTicket}
