@@ -5,8 +5,8 @@ const CheckoutPage = () => {
   return (
     <div>
       <Navbar isLoggedIn={false} />
-      <main className="flex justify-center items-center h-screen bg-gray-100">
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-l m-auto">
+      <main className="flex justify-center items-center h-screen bg-white-100">
+        <div className="max-w-4xl mx-auto p-6 bg-white rounded-l m-auto">
               <h1 className="text-xl font-bold text-gray-900 mb-6">Checkout</h1>
              <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="card-number">
