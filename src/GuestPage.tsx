@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const GuestPage = () => {
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ const GuestPage = () => {
 
   return (
     <div>
+      <Navbar isLoggedIn={false} />
+
       <h1>Guest Checkout</h1>
       <form onSubmit={handleGuestCheckout}>
         <input type="text" placeholder="Name" required />

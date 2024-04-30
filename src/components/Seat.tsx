@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils.ts";
 import React, { useState, useEffect, forwardRef } from "react";
 import axios from "axios";
 import requests from "@/Requests";
-import { useCart } from "@/components/Cart"; // Corrected import for useCart
+import { useCart } from "@/components/Cart";
 
 interface SeatProps extends React.HTMLAttributes<HTMLElement> {}
 interface TicketType {
@@ -49,14 +49,9 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
 
   const handleRemoveFromCart = () => {
     if (selectedSeat) {
-      const ticketType = ticketTypes.find(
-        (type) => type.id === selectedSeat.ticketTypeId
-      );
-      if (ticketType) {
-        removeFromCart(ticketType.price);
-        setIsInCart(false);
-        setSelectedSeat(null); // Optionally deselect the seat
-      }
+      removeFromCart();
+      setIsInCart(false);
+      setSelectedSeat(null);
     }
   };
 
@@ -79,7 +74,7 @@ export const Seat = forwardRef<HTMLDivElement, SeatProps>((props, ref) => {
             props.className
           )}
           ref={ref}
-          onClick={() => setSelectedSeat(seatRows[0]?.seats[0])} // Example logic to select a seat
+          onClick={() => setSelectedSeat(seatRows[0]?.seats[0])} 
         >
           <span className="text-xs p-2 rounded-full bg-indigo-500 text-white font-medium hover:bg-indigo-300">
             [n]

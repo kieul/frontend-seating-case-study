@@ -78,6 +78,7 @@ function App() {
                 <Seat key={i} />
               ))}
             </div>
+            
             <aside className="w-full md:max-w-sm bg-white rounded-md shadow-sm p-3 flex flex-col gap-2 order-first md:order-none">
               <Link to="/event">
                 <img

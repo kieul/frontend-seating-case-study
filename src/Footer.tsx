@@ -14,11 +14,10 @@ const Footer = () => {
       navigate("/guest");
     }
   };
-  
+
   const handleRemoveTicket = () => {
     if (totalTickets > 0) {
-      const ticketPrice = totalPrice / totalTickets;
-      removeFromCart(ticketPrice);
+      removeFromCart();
     }
   };
 
@@ -26,8 +25,12 @@ const Footer = () => {
     <footer className="sticky bottom-0 left-0 right-0 bg-white border-t border-zinc-200 flex justify-center">
       <div className="max-w-screen-lg p-6 flex justify-between items-center gap-4 grow">
         <div className="flex flex-col">
-          <span>Total for {totalTickets} tickets</span>
-          <span className="text-2xl font-semibold">{totalPrice} CZK</span>
+          <span>
+            Total for {totalTickets} tickets
+          </span>
+          <span className="text-2xl font-semibold">
+            {totalPrice} CZK
+          </span>
         </div>
         <div className="flex space-x-5">
           <Button

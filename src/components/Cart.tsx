@@ -4,7 +4,7 @@ interface CartContextType {
   totalTickets: number;
   totalPrice: number;
   addToCart: (price: number) => void;
-  removeFromCart: (price: number) => void;
+  removeFromCart: () => void; // Changed the signature to not accept a price
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -12,15 +12,20 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [totalTickets, setTotalTickets] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [lastPriceAdded, setLastPriceAdded] = useState<number | null>(null); // Track the last price added
 
   const addToCart = (price: number) => {
     setTotalTickets((prev) => prev + 1);
     setTotalPrice((prev) => prev + price);
+    setLastPriceAdded(price); // Update the last price added
   };
 
-  const removeFromCart = (price: number) => {
-    setTotalTickets((prev) => prev - 1);
-    setTotalPrice((prev) => prev - price);
+  const removeFromCart = () => {
+    if (totalTickets > 0 && lastPriceAdded !== null) {
+      setTotalTickets((prev) => prev - 1);
+      setTotalPrice((prev) => prev - lastPriceAdded);
+      setLastPriceAdded(null); // Reset the last price added after removal
+    }
   };
 
   return (

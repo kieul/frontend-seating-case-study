@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import { Button } from "@/components/ui/button.tsx";
 import axios from "axios";
 import requests from "./Requests";
-
 
 const Event = () => {
   const [eventData, setEventData] = useState({
@@ -28,7 +26,9 @@ const Event = () => {
           place: data.place,
         });
       })
-      .catch((error) => console.error("Error fetching event data:", error));
+      .catch((error) => {
+        console.error("Error fetching event data:", error);
+      });
   }, []);
 
   const handleAddToCalendar = () => {
@@ -99,7 +99,6 @@ const Event = () => {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     </>
   );
