@@ -13,6 +13,10 @@ interface Seat {
   id: number;
 }
 
+interface SeatRow {
+  seats: Seat[];
+}
+
 function App() {
   const isLoggedIn = false;
   const [eventName, setEventName] = useState("");
@@ -20,7 +24,7 @@ function App() {
   const [headerImageUrl, setHeaderImageUrl] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventPlace, setEventPlace] = useState("");
-  const [seatRows, setSeatRows] = useState([]);
+  const [seatRows, setSeatRows] = useState<SeatRow[]>([]);
 
   useEffect(() => {
     axios
