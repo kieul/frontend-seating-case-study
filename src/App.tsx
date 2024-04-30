@@ -45,7 +45,7 @@ function App() {
       .get(requests.requestEvent)
       .then((response) => {
         const data = response.data;
-        setSeatRows(data.seatRows || []);
+        setSeatRows(data.seatRows);
       })
       .catch((error) => console.error("Error fetching event data:", error));
   }, []);
